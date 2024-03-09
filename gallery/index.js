@@ -25,7 +25,7 @@ function showDate (data) {
   });
 }
 
-function searchData() {
+function searchData(el) {
  
    if(inputImg.value) {
     const elemens = document.querySelectorAll('img');
@@ -46,5 +46,10 @@ function searchData() {
 inputSearh.addEventListener('click', searchData);
 
 
+inputImg.addEventListener('keypress', function(el){
+  if(el.code === 'Enter') {
+    searchData();
+  }
+});
 
 
