@@ -5,11 +5,13 @@ const inputSearh = document.getElementById('header__search-icon');
 
 
 async function getData () {
-  const url = `https://api.unsplash.com/search/photos?query=${inputImg.value}&client_id=mJku6HcmVmVb2dbn8FIe0az3leZIcaeqlQzAgMA_89M&per_page=30`;
+  const url = `https://api.unsplash.com/search/photos?query=coffe&client_id=mJku6HcmVmVb2dbn8FIe0az3leZIcaeqlQzAgMA_89M&per_page=30`;
   const res = await fetch(url);
   const data = await res.json();
   showDate (data);
 }
+
+getData ();
 
 function showDate (data) {
   const arraw = Object.entries(data);
@@ -21,28 +23,28 @@ function showDate (data) {
   img.alt = `image`;
   imgGallery.appendChild(img);
   });
-  
 }
 
-inputSearh.addEventListener('click', getData);
+function searchData() {
+ 
+   if(inputImg.value) {
+    const elemens = document.querySelectorAll('img');
+    for(elemn of elemens) {
+      elemn.remove();
+    }
 
-function localGallery() {
-  localStorage.setItem('img', inputImg.value)
-};
-
-window.addEventListener('beforeunload', localGallery);
-
-function getLocalGallery() {
-  if(localStorage.getItem('img')) {
-    inputImg.value = localStorage.getItem('img');
-    getData();
-  } else {
-    inputImg.value = 'coffe';
-   
-    getData();
+    async function getData () {
+      const url = `https://api.unsplash.com/search/photos?query=${inputImg.value}&client_id=mJku6HcmVmVb2dbn8FIe0az3leZIcaeqlQzAgMA_89M&per_page=30`;
+      const res = await fetch(url);
+      const data = await res.json();
+      showDate (data);
+    }
+    getData ()
   }
 }
 
-window.addEventListener('load', getLocalGallery);
+inputSearh.addEventListener('click', searchData);
+
+
 
 
